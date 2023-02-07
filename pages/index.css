@@ -1,0 +1,17 @@
+@import url('../vendor/normalize.css');
+@import url('../vendor/reset.css');
+@import url('../vendor/inter-font.css');
+
+.root {
+    font-family: 'Inter', sans-serif, 'Helvetica';
+    background-color: white;
+    color: black;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.content {
+    display: flex;
+    margin: 100px 50px 50px 50px;
+    font-family: sans-serif;
+}
