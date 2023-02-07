@@ -15,3 +15,99 @@
     margin: 100px 50px 50px 50px;
     font-family: sans-serif;
 }
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    gap: 10px;
+}
+
+.keyboard-container {
+    width: 930px;
+    height: 310px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+}
+
+.row {
+    font-family: 'Inter', sans-serif, 'Helvetica';
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+
+.key {
+    background: white;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 46px;
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    border-radius: 10px;
+}
+
+.space {
+    width: 420px;
+}
+
+.rightshift {
+    width: 150px;
+}
+
+.leftshift {
+    width: 140px;
+}
+
+.caps {
+    width: 110px;
+}
+
+.tab {
+    width: 100px;
+}
+
+.enter {
+    width: 120px;
+}
+
+.backspace {
+    width: 130px;
+}
+
+.backotherbtn {
+    width: 80px;
+}
+
+.leftctrl {
+    width: 60px;
+}
+
+.rightctrl {
+    width: 60px;
+}
+
+.win {
+    width: 60px;
+}
+
+.alt {
+    width: 60px;
+}
+
+.fn {
+    width: 60px;
+}
+
+.key:hover {
+    color: red;
+    box-sizing: border-box;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
