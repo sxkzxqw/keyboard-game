@@ -1,95 +1,153 @@
-var area = document.getElementById('area');
-var cell = document.getElementsByClassName('cell');
-var currentPlayer = document.getElementById('curPlyr');
+document.addEventListener("keydown", function (e) {
+    handleKeyDown(e);
+});
 
-var player = "x";
-var stat = {
-    'x': 0,
-    'o': 0,
-    'd': 0
-}
-var winIndex = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
-    [1,5,9],
-    [3,5,7]
-];
-
-for(var i = 1; i <= 9; i++) {
-    area.innerHTML += "<div class='cell' pos=" + i + "></div>";
-}
-
-for (var i = 0; i< cell.length; i++) {
-    cell[i].addEventListener('click', cellClick, false);
-}
-
-function cellClick() {
-
-    var data = [];
-    
-    if(!this.innerHTML) {
-        this.innerHTML = player;
-    }else {
-        alert("Ячейка занята");
-        return;
+function handleKeyDown(e) {
+    switch (e.keyCode) {
+        case 188:
+            document.querySelector('.ldotbtn').classList.add('key_type_active');
+        break;
+        case 190:
+            document.querySelector('.dotbtn').classList.add('key_type_active');
+        break;
+        case 191:
+            document.querySelector('.quest').classList.add('key_type_active');
+        break;
+        case 32:
+            document.querySelector('.space').classList.add('key_type_active');
+        break;
+        case 186:
+            document.querySelector('.doubledot').classList.add('key_type_active');
+        break;
+        case 222:
+            document.querySelector('.updot').classList.add('key_type_active');
+        break;
+        case 27:
+            document.querySelector('.esc').classList.add('key_type_active');
+        break;
+        case 49:
+            document.querySelector('.onebtn').classList.add('key_type_active');
+        break;
+        case 50:
+            document.querySelector('.twobtn').classList.add('key_type_active');
+        break;
+        case 51:
+            document.querySelector('.threebtn').classList.add('key_type_active');
+        break;
+        case 52:
+            document.querySelector('.fourbtn').classList.add('key_type_active');
+        break;
+        case 53:
+            document.querySelector('.fivebtn').classList.add('key_type_active');
+        break;
+        case 54:
+            document.querySelector('.sixbtn').classList.add('key_type_active');
+        break;
+        case 55:
+            document.querySelector('.sevenbtn').classList.add('key_type_active');
+        break;
+        case 56:
+            document.querySelector('.eightbtn').classList.add('key_type_active');
+        break;
+        case 57:
+            document.querySelector('.ninebtn').classList.add('key_type_active');
+        break;
+        case 48:
+            document.querySelector('.zerobtn').classList.add('key_type_active');
+        break;
+        case 219:
+            document.querySelector('.backbtn').classList.add('key_type_active');
+        break;
+        case 221:
+            document.querySelector('.backotherbtn').classList.add('key_type_active');
+        break;
+        case 220:
+            document.querySelector('.backanotherbtn').classList.add('key_type_active');
+        break;
+        case 187:
+            document.querySelector('.ravnobtn').classList.add('key_type_active');
+        break;
+        default:
+            let key = `${e.key}btn`;
+            let keyLow = key.toLowerCase();
+            document.querySelector(`.${keyLow}`).classList.add('key_type_active');
+        break;
     }
-
-    for(var i in cell){
-        if(cell[i].innerHTML == player){
-            data.push(parseInt(cell[i].getAttribute('pos')));
-        }
-    }
-
-    if(checkWin(data)) {
-        stat[player] += 1;
-        restart("Выграл: " + player);
-    }else {
-        var draw = true;
-        for(var i in cell) {
-            if(cell[i].innerHTML == '') draw = false;
-        }
-        if(draw) {
-            stat.d += 1;
-            restart("Ничья");
-        }
-    }
-
-    player = player == "x" ? "o" : "x";
-    currentPlayer.innerHTML = player.toUpperCase();
 }
 
-function checkWin(data) {
-    for(var i in winIndex) {
-        var win = true;
-        for(var j in winIndex[i]) {
-            var id = winIndex[i][j];
-            var ind = data.indexOf(id);
+document.addEventListener('keyup', function(e) {
+    handleKeyUp(e);
+});
 
-            if(ind == -1) {
-                win = false
-            }
-        }
-
-        if(win) return true;
+function handleKeyUp(e) {
+    switch (e.keyCode) {
+        case 188:
+            document.querySelector('.ldotbtn').classList.remove('key_type_active');
+        break;
+        case 190:
+            document.querySelector('.dotbtn').classList.remove('key_type_active');
+        break;
+        case 191:
+            document.querySelector('.quest').classList.remove('key_type_active');
+        break;
+        case 32:
+            document.querySelector('.space').classList.remove('key_type_active');
+        break;
+        case 186:
+            document.querySelector('.doubledot').classList.remove('key_type_active');
+        break;
+        case 222:
+            document.querySelector('.updot').classList.remove('key_type_active');
+        break;
+        case 27:
+            document.querySelector('.esc').classList.remove('key_type_active');
+        break;
+        case 49:
+            document.querySelector('.onebtn').classList.remove('key_type_active');
+        break;
+        case 50:
+            document.querySelector('.twobtn').classList.remove('key_type_active');
+        break;
+        case 51:
+            document.querySelector('.threebtn').classList.remove('key_type_active');
+        break;
+        case 52:
+            document.querySelector('.fourbtn').classList.remove('key_type_active');
+        break;
+        case 53:
+            document.querySelector('.fivebtn').classList.remove('key_type_active');
+        break;
+        case 54:
+            document.querySelector('.sixbtn').classList.remove('key_type_active');
+        break;
+        case 55:
+            document.querySelector('.sevenbtn').classList.remove('key_type_active');
+        break;
+        case 56:
+            document.querySelector('.eightbtn').classList.remove('key_type_active');
+        break;
+        case 57:
+            document.querySelector('.ninebtn').classList.remove('key_type_active');
+        break;
+        case 48:
+            document.querySelector('.zerobtn').classList.remove('key_type_active');
+        break;
+        case 219:
+            document.querySelector('.backbtn').classList.remove('key_type_active');
+        break;
+        case 221:
+            document.querySelector('.backotherbtn').classList.remove('key_type_active');
+        break;
+        case 220:
+            document.querySelector('.backanotherbtn').classList.remove('key_type_active');
+        break;
+        case 187:
+            document.querySelector('.ravnobtn').classList.remove('key_type_active');
+        break;
+        default:
+            let key = `${e.key}btn`;
+            let keyLow = key.toLowerCase();
+            document.querySelector(`.${keyLow}`).classList.remove('key_type_active');
+        break;
     }
-    return false;
-}
-
-function restart(text) {
-    
-    alert(text);
-    for(var i = 0; i < cell.length; i++) {
-        cell[i].innerHTML = '';
-    }
-    updateStat();
-}
-
-function updateStat() {
-    document.getElementById('sX').innerHTML = stat.x;
-    document.getElementById('sO').innerHTML = stat.o;
-    document.getElementById('sD').innerHTML = stat.d;
 }

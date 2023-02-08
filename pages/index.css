@@ -2,18 +2,37 @@
 @import url('../vendor/reset.css');
 @import url('../vendor/inter-font.css');
 
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
 .root {
     font-family: 'Inter', sans-serif, 'Helvetica';
     background-color: white;
     color: black;
     max-width: 1240px;
     margin: 0 auto;
+    padding: 200px;
+    max-height: 1280px;
+    background: linear-gradient(90deg, 
+    #833ab4, #fd1d1d, #fcb045
+    );
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
 }
 
 .content {
     display: flex;
-    margin: 100px 50px 50px 50px;
     font-family: sans-serif;
+    width: 930px;
 }
 
 .keyboard {
@@ -25,11 +44,15 @@
 
 .keyboard-container {
     width: 930px;
-    height: 310px;
+    height: 315px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: gray;
+    background: #ccc;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.34);
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.34);
 }
 
 .row {
@@ -51,63 +74,57 @@
     -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     border-radius: 10px;
+    transition: all .2s;
+    cursor: default;
 }
 
 .space {
     width: 420px;
 }
 
-.rightshift {
+.shiftbtn {
     width: 150px;
 }
 
-.leftshift {
-    width: 140px;
-}
-
-.caps {
+.capslockbtn {
     width: 110px;
 }
 
-.tab {
+.tabbtn {
     width: 100px;
 }
 
-.enter {
+.enterbtn {
     width: 120px;
 }
 
-.backspace {
+.backspacebtn {
     width: 130px;
 }
 
-.backotherbtn {
+.backanotherbtn {
     width: 80px;
 }
 
-.leftctrl {
+.controlbtn {
     width: 60px;
 }
 
-.rightctrl {
+.metabtn {
     width: 60px;
 }
 
-.win {
+.altbtn {
     width: 60px;
 }
 
-.alt {
+.contextmenubtn {
     width: 60px;
 }
 
-.fn {
-    width: 60px;
-}
-
-.key:hover {
+.key_type_active {
     color: red;
     box-sizing: border-box;
-    border: 2px solid gray;
+    transform: scale(0.95);
     border-radius: 10px;
 }
