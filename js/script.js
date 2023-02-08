@@ -71,6 +71,8 @@ function handleKeyDown(e) {
             let key = `${e.key}btn`;
             let keyLow = key.toLowerCase();
             document.querySelector(`.${keyLow}`).classList.add('key_type_active');
+            const thisButton = document.querySelector(`.${keyLow}`);
+            thisButton.querySelector('.key-text').classList.add('key-text_type_active');
         break;
     }
 }
@@ -151,3 +153,25 @@ function handleKeyUp(e) {
         break;
     }
 }
+
+const allKeys = document.querySelectorAll('.key');
+
+const offKeyboardBacklight = document.querySelector('.offkeyboardbacklight');
+offKeyboardBacklight.addEventListener('click', () => {
+    allKeys.forEach((key) => {
+        key.setAttribute('style', 'animation: none; color: black; text-shadow: none;');
+        key.classList.add('key_type_no-backlight');
+    });
+    offKeyboardBacklight.textContent = 'on keyboard backlight';
+});
+
+const buttons = document.querySelectorAll('.button');
+const body = document.querySelector('.root');
+const offBackgroudGradient = document.querySelector('.offbackground');
+offBackgroudGradient.addEventListener('click', () => {
+    body.setAttribute('style', 'animation: none; background: white;');
+    offBackgroudGradient.textContent = 'on background gradient';
+    buttons.forEach((button) => {
+        button.setAttribute('style', 'background: black; color: white;');
+    })
+});
