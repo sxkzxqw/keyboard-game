@@ -185,14 +185,6 @@ const keyboardContainer = document.querySelector('.keyboard-container');
 const themeButton = document.querySelector('.theme-button');
 const offKeyboardBacklight = document.querySelector('.offkeyboardbacklight');
 
-offKeyboardBacklight.addEventListener('click', () => {
-    allKeys.forEach((key) => {
-        key.setAttribute('style', 'animation: none; color: black; text-shadow: none;');
-        key.classList.add('key_type_no-backlight');
-    });
-    offKeyboardBacklight.textContent = 'on keyboard backlight';
-});
-
 function handleOffBacklight() {
     allKeys.forEach((key) => {
         key.setAttribute('style', 'animation: none; color: black;');
@@ -202,9 +194,11 @@ function handleOffBacklight() {
             key.classList.add('key_type_no-backlight-dark');
         }
     });
-    offKeyboardBacklight.textContent = 'on keyboard backlight';
     offKeyboardBacklight.removeEventListener('click', handleOffBacklight);
     offKeyboardBacklight.addEventListener('click', handleOnBacklight);
+    if (allKeys[0].classList.contains('key_type_no-backlight')) {
+        offKeyboardBacklight.textContent = 'on keyboard backlight';
+    }
 }
 
 function handleOnBacklight() {
@@ -216,7 +210,9 @@ function handleOnBacklight() {
             key.classList.remove('key_type_no-backlight-dark');
         }
     });
-    offKeyboardBacklight.textContent = 'off keyboard backlight';
+    if (!allKeys[0].classList.contains('key_type_no-backlight')) {
+        offKeyboardBacklight.textContent = 'off keyboard backlight';
+    }
     offKeyboardBacklight.removeEventListener('click', handleOnBacklight);
     offKeyboardBacklight.addEventListener('click', handleOffBacklight);
 }
@@ -227,10 +223,13 @@ function handleSwitchThemeDark() {
     allKeys.forEach((key) => {
         key.setAttribute('style', 'background: #0C0C0CFF;');
     });
-    keyboardContainer.setAttribute('style', 'background: #151515FF');
+    keyboardContainer.setAttribute('style', 'background: #151515FF;');
     themeButton.textContent = 'switch keyboard theme to light';
     themeButton.removeEventListener('click', handleSwitchThemeDark);
     themeButton.addEventListener('click', handleSwitchThemeLight);
+    if (allKeys[0].classList.contains('key_type_no-backlight')) {
+        handleOffBacklight();
+    }
 }
 
 function handleSwitchThemeLight() {
@@ -241,6 +240,9 @@ function handleSwitchThemeLight() {
     themeButton.textContent = 'switch keyboard theme to dark';
     themeButton.removeEventListener('click', handleSwitchThemeLight);
     themeButton.addEventListener('click', handleSwitchThemeDark);
+    if (allKeys[0].classList.contains('key_type_no-backlight')) {
+        handleOffBacklight();
+    }
 }
 
 handleSwitchThemeLight();
