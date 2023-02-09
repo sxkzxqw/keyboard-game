@@ -15,6 +15,11 @@
 }
 
 @keyframes color {
+    0% {
+        color: #DF46E7;
+        box-shadow: 0px 0px 3px 2px rgba(223, 70, 231, 0.34);
+        text-shadow: 0px 0px 4px rgba(223, 70, 231, 0.5);
+    }
     5% {
         color: #C042D6;
         box-shadow: 0px 0px 3px 2px rgba(192, 66, 214, 0.34);
@@ -55,6 +60,11 @@
         box-shadow: 0px 0px 3px 2px rgba(253, 74, 247, 0.34);
         text-shadow: 0px 0px 4px rgba(253, 74, 247, 0.5);
     }
+    100% {
+        color: #DF46E7;
+        box-shadow: 0px 0px 3px 2px rgba(223, 70, 231, 0.34);
+        text-shadow: 0px 0px 4px rgba(223, 70, 231, 0.5);
+    }
 }
 .root {
     font-family: 'Inter', sans-serif, 'Helvetica';
@@ -86,12 +96,12 @@
 
 .keyboard-container {
     width: 930px;
-    height: 315px;
+    height: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #ccc;
-    border-radius: 8px;
+    border-radius: 10px;
     -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.34);
     -moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.34);
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.34);
@@ -112,15 +122,9 @@
     font-size: 20px;
     text-align: center;
     line-height: 46px;
-/*     -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
-    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
-    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34); */
     border-radius: 10px;
     transition: all .2s;
     cursor: default;
-    color: #DF46E7;
-    box-shadow: 0px 0px 3px 2px rgba(223, 70, 231, 0.34);
-    text-shadow: 0px 0px 4px rgba(223, 70, 231, 0.5);
     animation: color 10s linear infinite;
 }
 
@@ -129,6 +133,13 @@
     -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     color: black;
+}
+
+.key_type_no-backlight-dark {
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    color: white;
 }
 
 .space {
@@ -183,7 +194,6 @@
 
 .modal-buttons {
     width: 100px;
-    height: 200px;
     position: absolute;
     left: 20px;
     top: 20px;
@@ -199,8 +209,9 @@
 
 .button {
     font-family: 'Inter';
-    height: 40px;
+    height: 50px;
     width: 200px;
     background: white;
     border-radius: 15px;
+    padding: 0 15px;
 }

@@ -71,8 +71,6 @@ function handleKeyDown(e) {
             let key = `${e.key}btn`;
             let keyLow = key.toLowerCase();
             document.querySelector(`.${keyLow}`).classList.add('key_type_active');
-            const thisButton = document.querySelector(`.${keyLow}`);
-            thisButton.querySelector('.key-text').classList.add('key-text_type_active');
         break;
     }
 }
@@ -154,9 +152,39 @@ function handleKeyUp(e) {
     }
 }
 
-const allKeys = document.querySelectorAll('.key');
+const buttons = document.querySelectorAll('.button');
+const body = document.querySelector('.root');
+const offBackgroudGradient = document.querySelector('.offbackground');
 
+function handleOffBackground() {
+        body.setAttribute('style', 'animation: none; background: #EFDECD;');
+        offBackgroudGradient.textContent = 'on background gradient';
+        buttons.forEach((button) => {
+            button.setAttribute('style', 'background: black; color: white;');
+        });
+        offBackgroudGradient.removeEventListener('click', handleOffBackground);
+        offBackgroudGradient.addEventListener('click', handleOnBackground);
+}
+
+function handleOnBackground() {
+        body.setAttribute('style', 'animation: gradient 10s ease infinite; background: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045);');
+        offBackgroudGradient.textContent = 'off background gradient';
+        buttons.forEach((button) => {
+            button.setAttribute('style', 'background: white; color: black;');
+        });
+        offBackgroudGradient.removeEventListener('click', handleOnBackground);
+        offBackgroudGradient.addEventListener('click', handleOffBackground);
+}
+
+handleOnBackground();
+
+
+
+const allKeys = document.querySelectorAll('.key');
+const keyboardContainer = document.querySelector('.keyboard-container');
+const themeButton = document.querySelector('.theme-button');
 const offKeyboardBacklight = document.querySelector('.offkeyboardbacklight');
+
 offKeyboardBacklight.addEventListener('click', () => {
     allKeys.forEach((key) => {
         key.setAttribute('style', 'animation: none; color: black; text-shadow: none;');
@@ -165,13 +193,54 @@ offKeyboardBacklight.addEventListener('click', () => {
     offKeyboardBacklight.textContent = 'on keyboard backlight';
 });
 
-const buttons = document.querySelectorAll('.button');
-const body = document.querySelector('.root');
-const offBackgroudGradient = document.querySelector('.offbackground');
-offBackgroudGradient.addEventListener('click', () => {
-    body.setAttribute('style', 'animation: none; background: white;');
-    offBackgroudGradient.textContent = 'on background gradient';
-    buttons.forEach((button) => {
-        button.setAttribute('style', 'background: black; color: white;');
-    })
-});
+function handleOffBacklight() {
+    allKeys.forEach((key) => {
+        key.setAttribute('style', 'animation: none; color: black;');
+        key.classList.add('key_type_no-backlight');
+        if (themeButton.textContent == 'switch keyboard theme to light') {
+            key.setAttribute('style', 'animation: none; color: white; background: #0C0C0CFF;');
+            key.classList.add('key_type_no-backlight-dark');
+        }
+    });
+    offKeyboardBacklight.textContent = 'on keyboard backlight';
+    offKeyboardBacklight.removeEventListener('click', handleOffBacklight);
+    offKeyboardBacklight.addEventListener('click', handleOnBacklight);
+}
+
+function handleOnBacklight() {
+    allKeys.forEach((key) => {
+        key.setAttribute('style', 'animation: color 10s linear infinite;');
+        key.classList.remove('key_type_no-backlight');
+        if (themeButton.textContent == 'switch keyboard theme to light') {
+            key.setAttribute('style', 'animation: color 10s linear infinite; background: #0C0C0CFF;');
+            key.classList.remove('key_type_no-backlight-dark');
+        }
+    });
+    offKeyboardBacklight.textContent = 'off keyboard backlight';
+    offKeyboardBacklight.removeEventListener('click', handleOnBacklight);
+    offKeyboardBacklight.addEventListener('click', handleOffBacklight);
+}
+
+handleOnBacklight();
+
+function handleSwitchThemeDark() {
+    allKeys.forEach((key) => {
+        key.setAttribute('style', 'background: #0C0C0CFF;');
+    });
+    keyboardContainer.setAttribute('style', 'background: #151515FF');
+    themeButton.textContent = 'switch keyboard theme to light';
+    themeButton.removeEventListener('click', handleSwitchThemeDark);
+    themeButton.addEventListener('click', handleSwitchThemeLight);
+}
+
+function handleSwitchThemeLight() {
+    allKeys.forEach((key) => {
+        key.setAttribute('style', 'background: white;');
+    });
+    keyboardContainer.setAttribute('style', 'background: #ccc;');
+    themeButton.textContent = 'switch keyboard theme to dark';
+    themeButton.removeEventListener('click', handleSwitchThemeLight);
+    themeButton.addEventListener('click', handleSwitchThemeDark);
+}
+
+handleSwitchThemeLight();
