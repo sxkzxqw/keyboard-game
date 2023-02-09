@@ -1,3 +1,9 @@
+//----------------------------------------------------------------------------
+
+//keyboard
+
+
+//keydown functionality
 document.addEventListener("keydown", function (e) {
     handleKeyDown(e);
 });
@@ -75,6 +81,7 @@ function handleKeyDown(e) {
     }
 }
 
+// keyup functionality
 document.addEventListener('keyup', function(e) {
     handleKeyUp(e);
 });
@@ -152,6 +159,8 @@ function handleKeyUp(e) {
     }
 }
 
+
+// switch background color
 const buttons = document.querySelectorAll('.button');
 const body = document.querySelector('.root');
 const offBackgroudGradient = document.querySelector('.offbackground');
@@ -179,7 +188,7 @@ function handleOnBackground() {
 handleOnBackground();
 
 
-
+//off and on backlight
 const allKeys = document.querySelectorAll('.key');
 const keyboardContainer = document.querySelector('.keyboard-container');
 const themeButton = document.querySelector('.theme-button');
@@ -219,6 +228,7 @@ function handleOnBacklight() {
 
 handleOnBacklight();
 
+//switch themes
 function handleSwitchThemeDark() {
     allKeys.forEach((key) => {
         key.setAttribute('style', 'background: #0C0C0CFF;');
@@ -246,3 +256,7 @@ function handleSwitchThemeLight() {
 }
 
 handleSwitchThemeLight();
+
+//keyboard
+
+//---------------------------------------------------------------------------------------
