@@ -12,6 +12,10 @@
 
 <body class="root">
     <div class="content">
+        <div class="game">
+            <textarea class="game__text" type="text"></textarea>
+            <p class="game__placeholder"></p>
+        </div>
         <div class="keyboard-container">
         <div class="keyboard">
             <ul class="row-1 row">
@@ -94,6 +98,9 @@
                 <button type="button" class="theme-button button">switch keyboard theme to dark</button>
             </div>
         </div>
+        <template id="words">
+            <span class="word-place"></span>
+        </template>
     </div>
     <script src="./js/script.js"></script>
 </body>
