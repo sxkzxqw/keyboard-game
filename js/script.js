@@ -165,26 +165,26 @@ const body = document.querySelector('.root');
 const offBackgroudGradient = document.querySelector('.offbackground');
 
 function handleOffBackground() {
-        body.setAttribute('style', 'animation: none; background: #EFDECD;');
-        offBackgroudGradient.textContent = 'on background gradient';
+        body.setAttribute('style', 'background: #EFDECD;');
+        offBackgroudGradient.textContent = 'theme: light';
         buttons.forEach((button) => {
-            button.setAttribute('style', 'background: black; color: white;');
+            button.setAttribute('style', 'background: white; color: black;');
         });
         offBackgroudGradient.removeEventListener('click', handleOffBackground);
         offBackgroudGradient.addEventListener('click', handleOnBackground);
 }
 
 function handleOnBackground() {
-        body.setAttribute('style', 'animation: gradient 10s ease infinite; background: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045);');
-        offBackgroudGradient.textContent = 'off background gradient';
+        body.setAttribute('style', 'background: #1B1B1EFF');
+        offBackgroudGradient.textContent = 'theme: dark';
         buttons.forEach((button) => {
-            button.setAttribute('style', 'background: white; color: black;');
+            button.setAttribute('style', 'background: #111012FF; color: white;');
         });
         offBackgroudGradient.removeEventListener('click', handleOnBackground);
         offBackgroudGradient.addEventListener('click', handleOffBackground);
 }
 
-handleOnBackground();
+handleOffBackground();
 
 
 //off and on backlight
@@ -267,11 +267,9 @@ handleSwitchThemeLight();
 //game logic
 
 
-//removing empty strokes in array
-/* const arrayOfPlaceHolderWords = word.filter(function (word) { 
-    return word.length > 0;
-}); */
 
+//text validation
+const gameTemplate = document.querySelector('#game-template').content;
 const placeHolderText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam explicabo veritatis, sapiente doloribus placeat reprehenderit 
 quasi voluptas ipsam quos perferendis laudantium expedita quidem minima cum temporibus consequuntur praesentium tenetur quas?
 Consequatur quae deleniti voluptate dolore consectetur! Voluptatum vel accusamus aut. Iure fugit nisi reiciendis quos repudiandae 
@@ -286,7 +284,7 @@ Ab autem at nostrum, repudiandae, aspernatur sed ullam, nulla optio facilis reic
 const text = placeHolderText.split(' ');
 const templateForEachWord = document.querySelector('#words').content;
 const templateSpan = templateForEachWord.querySelector('.word-place');
-const placeHolder = document.querySelector('.game__placeholder');
+const placeHolder = gameTemplate.querySelector('.game__placeholder');
 
 function addWordToSpan(word) {
         const newSpan = templateSpan.cloneNode(true);
@@ -298,7 +296,7 @@ text.forEach(function(text) {
     addWordToSpan(text);
 });
 
-const inputText = document.querySelector('.game__text');
+const inputText = gameTemplate.querySelector('.game__text');
 
 inputText.addEventListener('input', function(event) {
     checkTextAccordance(event);
@@ -317,4 +315,20 @@ function checkTextAccordance(event) {
         inputText.classList.remove('game__text_type_correct');
         inputText.classList.add('game__text_type_incorrect');
     }
+}
+
+//start game functionality
+const startGameButton = document.querySelector('.start-game-button');
+const content = document.querySelector('.content');
+startGameButton.addEventListener('click', () => {
+    startGameButton.setAttribute('style', 'animation: scaling 0.5s ease; animation-delay: 0s;');
+    addGame();
+});
+
+
+function addGame() {
+    setTimeout(() => {
+        startGameButton.remove();
+        content.prepend(gameTemplate);
+    }, 500);
 }

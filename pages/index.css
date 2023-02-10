@@ -14,6 +14,32 @@
     }
 }
 
+@keyframes suggest {
+    0% {
+        transform: translate(0px, 0%);
+        background-position: 0 50%;
+    }
+    6% {
+        transform: translate(0px, -7%)
+    }
+    12% {
+        transform: translate(0px, 0%)
+    }
+    18% {
+        transform: translate(0px, -7%)
+    }
+    24% {
+        transform: translate(0px, 0%)
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+
 @keyframes color {
     0% {
         color: #DF46E7;
@@ -66,6 +92,16 @@
         text-shadow: 0px 0px 4px rgba(223, 70, 231, 0.5);
     }
 }
+
+@keyframes scaling {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
 .root {
     font-family: 'Inter', sans-serif, 'Helvetica';
     background-color: white;
@@ -73,14 +109,10 @@
     max-width: 1240px;
     margin: 0 auto;
     padding: 50px;
-    max-height: 1280px;
-    background: linear-gradient(90deg, 
-    #833ab4, #fd1d1d, #fcb045
-    );
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    background: black;
     display: flex;
     justify-content: center;
+    height: 1280px;
 }
 
 .content {
@@ -266,9 +298,12 @@
     font-family: 'Inter';
     height: 50px;
     width: 200px;
-    background: white;
+    background: inherit;
     border-radius: 15px;
     padding: 0 15px;
+    transition: all .4s;
+    border: 3px solid black;
+    box-sizing: border-box;
 }
 
 .game__text_type_correct {
@@ -281,4 +316,28 @@
     opacity: 1;
     color: #fd1d1d;
     text-shadow: 0px 0px 4px rgba(253, 29, 29, 0.5);
+}
+
+.start-game-button {
+    width: 500px;
+    height: 200px;
+    background: white;
+    font-family: 'Inter';
+    border-radius: 50px;
+    border: 3px solid black;
+    box-sizing: border-box;
+    font-size: 50px;
+    background: linear-gradient(90deg, 
+    #833ab4, #fd1d1d, #fcb045
+    );
+    background-size: 400% 400%;
+    position: absolute;
+    top: 120px;
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+    z-index: 0;
+    animation: suggest 3s ease infinite;
+    animation-delay: 2s;
 }
