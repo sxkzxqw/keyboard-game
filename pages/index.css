@@ -270,3 +270,15 @@
     border-radius: 15px;
     padding: 0 15px;
 }
+
+.game__text_type_correct {
+    opacity: 1;
+    color: #45FD3CB8;
+    text-shadow: 0px 0px 4px rgba(55, 253, 64, 0.5);
+}
+
+.game__text_type_incorrect {
+    opacity: 1;
+    color: #fd1d1d;
+    text-shadow: 0px 0px 4px rgba(253, 29, 29, 0.5);
+}

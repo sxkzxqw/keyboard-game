@@ -288,16 +288,6 @@ const templateForEachWord = document.querySelector('#words').content;
 const templateSpan = templateForEachWord.querySelector('.word-place');
 const placeHolder = document.querySelector('.game__placeholder');
 
-/* function addWordToSpan() {
-    text.forEach(function (word) {
-        templateForEachWord.cloneNode(true);
-        templateForEachWord.querySelector('.word-place').textContent = word;
-        placeHolder.append(templateForEachWord);
-    });
-}
-
-addWordToSpan(); */
-
 function addWordToSpan(word) {
         const newSpan = templateSpan.cloneNode(true);
         newSpan.textContent = `${word} `;
@@ -307,3 +297,24 @@ function addWordToSpan(word) {
 text.forEach(function(text) {
     addWordToSpan(text);
 });
+
+const inputText = document.querySelector('.game__text');
+
+inputText.addEventListener('input', function(event) {
+    checkTextAccordance(event);
+});
+
+const everySymbolInText = placeHolderText.split('');
+function checkTextAccordance(event) {
+    let inputLength = inputText.value.length;
+    let currentInputLength = inputLength - 1;
+    let inputSymbol = event.data;
+    console.log(inputSymbol == everySymbolInText[currentInputLength]);
+    if (inputSymbol == everySymbolInText[currentInputLength]) {
+        inputText.classList.remove('game__text_type_incorrect');
+        inputText.classList.add('game__text_type_correct');
+    } else if (inputSymbol != everySymbolInText[currentInputLength]) {
+        inputText.classList.remove('game__text_type_correct');
+        inputText.classList.add('game__text_type_incorrect');
+    }
+}
