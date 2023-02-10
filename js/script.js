@@ -332,6 +332,7 @@ const timerTemplate = document.querySelector('#timer-template').content;
 startGameButton.addEventListener('click', () => {
     startGameButton.setAttribute('style', 'animation: scaling 0.4s ease; animation-delay: 0s;');
     addGame();
+    document.addEventListener('keydown', addCountDown);
 });
 
 
@@ -354,18 +355,19 @@ function gameStartSuggestionShow() {
 function gameStart() {
     gameText.focus();
     keyboardSuggestContent.setAttribute('style', 'animation: scaling 0.4s ease;');
-    addCountDown();
     setTimeout(() => {
         keyboardSuggestContent.remove();
     }, 400);
 }
 
 //countdown functionality
-let time = 60;
+let time = 58;
 const countDownText = timerTemplate.querySelector('.timer__time-counter');
 
 function addCountDown() {
+    countDownText.textContent = `0:59`;
     setInterval(updateCountDown, 1000);
+    document.removeEventListener('keydown', addCountDown);
 }
 
 function updateCountDown() {
