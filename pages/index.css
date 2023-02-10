@@ -449,3 +449,31 @@
     font-family: 'Inter';
     font-size: 22px;
 }
+
+.timer {
+    background: #111012FF;
+    border: 3px solid black;
+    border-radius: 20px;
+    color: white;
+    width: 270px;
+    height: 190px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    position: absolute;
+    top: 200px;
+    right: 160px;
+    animation: scaling-reverse 0.5s ease;
+}
+
+.timer__text {
+    font-size: 40px;
+    text-align: center;
+}
+
+.timer__time-counter {
+    font-size: 100px;
+}

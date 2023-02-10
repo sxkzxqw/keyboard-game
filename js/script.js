@@ -324,6 +324,11 @@ const content = document.querySelector('.content');
 const keyboardSuggestTemplate = document.querySelector('#keyboard-suggest').content;
 const keyboardSuggestContent = keyboardSuggestTemplate.querySelector('.keyboard__suggest');
 const gameText = gameTemplate.querySelector('.game__text');
+const timerTemplate = document.querySelector('#timer-template').content;
+
+
+
+
 startGameButton.addEventListener('click', () => {
     startGameButton.setAttribute('style', 'animation: scaling 0.4s ease; animation-delay: 0s;');
     addGame();
@@ -335,6 +340,7 @@ function addGame() {
         startGameButton.remove();
         buttonContainer.remove();
         content.prepend(gameTemplate);
+        content.append(timerTemplate);
         gameText.focus();
         content.append(keyboardSuggestTemplate);
         gameStartSuggestionShow();
@@ -342,11 +348,30 @@ function addGame() {
 }
 
 function gameStartSuggestionShow() {
-    document.addEventListener('keydown', () => {
-        gameText.focus();
-        keyboardSuggestContent.setAttribute('style', 'animation: scaling 0.4s ease;');
-        setTimeout(() => {
-            keyboardSuggestContent.remove();
-        }, 400);
-    });
+    document.addEventListener('keydown', gameStart);
+}
+
+function gameStart() {
+    gameText.focus();
+    keyboardSuggestContent.setAttribute('style', 'animation: scaling 0.4s ease;');
+    addCountDown();
+    setTimeout(() => {
+        keyboardSuggestContent.remove();
+    }, 400);
+}
+
+//countdown functionality
+let time = 60;
+const countDownText = timerTemplate.querySelector('.timer__time-counter');
+
+function addCountDown() {
+    setInterval(updateCountDown, 1000);
+}
+
+function updateCountDown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    seconds = seconds < 10 ? "0" + seconds:seconds;
+    countDownText.textContent = `${minutes}:${seconds}`;
+    time--;
 }
