@@ -12,7 +12,9 @@
 
 <body class="root">
     <div class="content">
-        <button type="button" class="start-game-button">PLAY!</button>
+        <div class="button-container">
+            <button type="button" class="start-game-button">PLAY!</button>
+        </div>
         <div class="keyboard-container">
             <div class="keyboard">
                 <ul class="row-1 row">
@@ -103,6 +105,22 @@
         </template>
         <template id="words">
             <span class="word-place"></span>
+        </template>
+        <template id="keyboard-suggest">
+            <div class="keyboard__suggest">
+                <div class="keyboard__suggest">
+                    <p class="keyboard__suggest-text">PRESS ANY KEY TO START</p>
+                    <img class="keyboard__suggest-image" src="./images/arrow-down-svgrepo-com.svg">
+                    <ul class="keyboard__suggest-list">
+                        <div class="w-container">
+                            <li class="wbtn-suggest suggest-key">w</li>
+                        </div>
+                        <li class="abtn-suggest suggest-key">a</li>
+                        <li class="sbtn-suggest suggest-key">s</li>
+                        <li class="dbtn-suggest suggest-key">d</li>
+                    </ul>
+                </div>
+            </div>
         </template>
     </div>
     <script src="./js/script.js"></script>

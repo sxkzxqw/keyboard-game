@@ -319,9 +319,13 @@ function checkTextAccordance(event) {
 
 //start game functionality
 const startGameButton = document.querySelector('.start-game-button');
+const buttonContainer = document.querySelector('.button-container');
 const content = document.querySelector('.content');
+const keyboardSuggestTemplate = document.querySelector('#keyboard-suggest').content;
+const keyboardSuggestContent = keyboardSuggestTemplate.querySelector('.keyboard__suggest');
+const gameText = gameTemplate.querySelector('.game__text');
 startGameButton.addEventListener('click', () => {
-    startGameButton.setAttribute('style', 'animation: scaling 0.5s ease; animation-delay: 0s;');
+    startGameButton.setAttribute('style', 'animation: scaling 0.4s ease; animation-delay: 0s;');
     addGame();
 });
 
@@ -329,6 +333,20 @@ startGameButton.addEventListener('click', () => {
 function addGame() {
     setTimeout(() => {
         startGameButton.remove();
+        buttonContainer.remove();
         content.prepend(gameTemplate);
-    }, 500);
+        gameText.focus();
+        content.append(keyboardSuggestTemplate);
+        gameStartSuggestionShow();
+    }, 400);
+}
+
+function gameStartSuggestionShow() {
+    document.addEventListener('keydown', () => {
+        gameText.focus();
+        keyboardSuggestContent.setAttribute('style', 'animation: scaling 0.4s ease;');
+        setTimeout(() => {
+            keyboardSuggestContent.remove();
+        }, 400);
+    });
 }

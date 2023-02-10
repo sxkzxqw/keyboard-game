@@ -102,17 +102,53 @@
     }
 }
 
+@keyframes scaling-reverse {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes active-key-suggest {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes suggest-arrow {
+    0% {
+        transform: translate(0px, 0%);
+    }
+    8% {
+        transform: translate(0px, 10%)
+    }
+    16% {
+        transform: translate(0px, 0%)
+    }
+    24% {
+        transform: translate(0px, 10%)
+    }
+    32% {
+        transform: translate(0px, 0%)
+    }
+}
+
 .root {
     font-family: 'Inter', sans-serif, 'Helvetica';
-    background-color: white;
     color: black;
     max-width: 1240px;
     margin: 0 auto;
     padding: 50px;
-    background: black;
     display: flex;
     justify-content: center;
-    height: 1280px;
 }
 
 .content {
@@ -140,6 +176,7 @@
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.34);
     box-sizing: border-box;
     border: 3px solid black;
+    animation: scaling-reverse 0.5s ease;
 }
 
 .game__text {
@@ -331,13 +368,84 @@
     #833ab4, #fd1d1d, #fcb045
     );
     background-size: 400% 400%;
-    position: absolute;
-    top: 120px;
     -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
     text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
-    z-index: 0;
     animation: suggest 3s ease infinite;
     animation-delay: 2s;
+}
+
+.button-container {
+    width: 1000px;
+    height: 500px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboard__suggest {
+    position: absolute;
+    left: 100px;
+    bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: scaling-reverse 0.5s ease;
+}
+
+.suggest-key {
+    background: black;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 46px;
+    border-radius: 10px;
+    transition: all .2s;
+    cursor: default;
+    animation: color 10s linear infinite;
+}
+
+.w-container {
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    grid-area: w;
+    animation: active-key-suggest 1.5s ease infinite;
+}
+
+.abtn-suggest {
+    grid-area: a;
+}
+
+.sbtn-suggest {
+    grid-area: s;
+}
+
+.dbtn-suggest {
+    grid-area: d;
+}
+
+.keyboard__suggest-list {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+                        'w w w'
+                        'a s d';
+}
+
+.keyboard__suggest-image {
+    height: 100px;
+    width: 60px;
+    animation: suggest-arrow 3s ease infinite;
+}
+
+.keyboard__suggest-text {
+    text-align: center;
+    font-family: 'Inter';
+    font-size: 22px;
 }
