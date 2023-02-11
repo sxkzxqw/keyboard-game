@@ -309,6 +309,7 @@ function checkTextAccordance(event) {
 
 
 let counterOfWords = -1;
+let counterOfCorrectWords = 0;
 const configForFindWord = `.wordplace`;
 gameText.addEventListener('keydown', function(event) {
     if (event.keyCode === 32) {
@@ -319,6 +320,7 @@ gameText.addEventListener('keydown', function(event) {
         const correctWord = correctWordClass.textContent.trim();
         if (currentWord == correctWord) {
             correctWordClass.classList.add('game__text_type_correct');
+            counterOfCorrectWords++;
         } else if (currentWord != correctWord) {
             correctWordClass.classList.add('game__text_type_incorrect');
         }
@@ -342,7 +344,7 @@ gameText.addEventListener('keydown', function(event) {
             currentText = currentText.split(' ').reverse().join(' ').substring(1).length;
             /* console.log(currentText);
             console.log(gameText.value.length); */
-            if (currentText + 1 >= gameText.value.length) {
+            if (currentText + 1 >= gameText.value.length && gameText.value.length > 1) {
                 event.preventDefault();
                 return false;
             }
@@ -415,3 +417,6 @@ function updateCountDown() {
     countDownText.textContent = `${minutes}:${seconds}`;
     time--;
 }
+
+const gameoverTemplate = document.querySelector('#gameover').content;
+content.append(gameoverTemplate);
