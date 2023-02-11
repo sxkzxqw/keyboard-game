@@ -270,44 +270,33 @@ handleSwitchThemeLight();
 
 //text validation
 const gameTemplate = document.querySelector('#game-template').content;
-const placeHolderText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam explicabo veritatis, sapiente doloribus placeat reprehenderit 
-quasi voluptas ipsam quos perferendis laudantium expedita quidem minima cum temporibus consequuntur praesentium tenetur quas?
-Consequatur quae deleniti voluptate dolore consectetur! Voluptatum vel accusamus aut. Iure fugit nisi reiciendis quos repudiandae 
-exercitationem adipisci sed, tenetur deserunt, rem voluptas odio, expedita laborum sint culpa ex cumque?
-At illo quibusdam ratione eos blanditiis quisquam eius doloribus molestiae ipsam, ea temporibus earum laudantium? Magnam similique 
-reprehenderit placeat, provident quidem aperiam impedit illum deserunt enim voluptate laborum, id rem.
-Dolor perspiciatis itaque optio? Enim animi consequatur, totam repellendus recusandae, provident accusamus accusantium placeat, 
-sequi modi optio voluptas repudiandae! Modi animi cum sint saepe ea, consequuntur repellat pariatur ducimus tempore.
-Nam, illo, eum accusamus inventore temporibus voluptate obcaecati, impedit doloremque ipsam et dolorum illum doloribus fuga. 
-Ab autem at nostrum, repudiandae, aspernatur sed ullam, nulla optio facilis reiciendis obcaecati iusto.`;
+const placeHolderText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam explicabo veritatis, sapiente doloribus placeat reprehenderit quasi voluptas ipsam quos perferendis laudantium expedita quidem minima cum temporibus consequuntur praesentium tenetur quas?Consequatur quae deleniti voluptate dolore consectetur! Voluptatum vel accusamus aut. Iure fugit nisi reiciendis quos repudiandae exercitationem adipisci sed, tenetur deserunt, rem voluptas odio, expedita laborum sint culpa ex cumque?At illo quibusdam ratione eos blanditiis quisquam eius doloribus molestiae ipsam, ea temporibus earum laudantium? Magnam similique reprehenderit placeat, provident quidem aperiam impedit illum deserunt enim voluptate laborum, id rem.Dolor perspiciatis itaque optio? Enim animi consequatur, totam repellendus recusandae, provident accusamus accusantium placeat, sequi modi optio voluptas repudiandae! Modi animi cum sint saepe ea, consequuntur repellat pariatur ducimus tempore.Nam, illo, eum accusamus inventore temporibus voluptate obcaecati, impedit doloremque ipsam et dolorum illum doloribus fuga. Ab autem at nostrum, repudiandae, aspernatur sed ullam, nulla optio facilis reiciendis obcaecati iusto.`;
 
 const text = placeHolderText.split(' ');
 const templateForEachWord = document.querySelector('#words').content;
 const templateSpan = templateForEachWord.querySelector('.word-place');
 const placeHolder = gameTemplate.querySelector('.game__placeholder');
+const gameText = gameTemplate.querySelector('.game__text');
 
-function addWordToSpan(word) {
-        const newSpan = templateSpan.cloneNode(true);
-        newSpan.textContent = `${word} `;
-        placeHolder.append(newSpan);
+//using cycle to add a number of word to classlist
+for (let i = 0; i < text.length; i++) { 
+    const newSpan = templateSpan.cloneNode(true);
+    newSpan.classList.add(`wordplace${i}`);
+    newSpan.textContent = `${text[i]} `;
+    placeHolder.append(newSpan);
 }
-
-text.forEach(function(text) {
-    addWordToSpan(text);
-});
 
 const inputText = gameTemplate.querySelector('.game__text');
 
-inputText.addEventListener('input', function(event) {
+/* inputText.addEventListener('input', function(event) {
     checkTextAccordance(event);
-});
+}); */
 
-const everySymbolInText = placeHolderText.split('');
+/* const everySymbolInText = placeHolderText.split('');
 function checkTextAccordance(event) {
     let inputLength = inputText.value.length;
     let currentInputLength = inputLength - 1;
     let inputSymbol = event.data;
-    console.log(inputSymbol == everySymbolInText[currentInputLength]);
     if (inputSymbol == everySymbolInText[currentInputLength]) {
         inputText.classList.remove('game__text_type_incorrect');
         inputText.classList.add('game__text_type_correct');
@@ -315,7 +304,53 @@ function checkTextAccordance(event) {
         inputText.classList.remove('game__text_type_correct');
         inputText.classList.add('game__text_type_incorrect');
     }
-}
+} */
+
+
+
+let counterOfWords = -1;
+const configForFindWord = `.wordplace`;
+gameText.addEventListener('keydown', function(event) {
+    if (event.keyCode === 32) {
+        const inputTextArray = inputText.value.split(' ');
+        counterOfWords++;
+        const currentWord = inputTextArray[inputTextArray.length - 1];
+        const correctWordClass = placeHolder.querySelector(`${configForFindWord}${counterOfWords}`);
+        const correctWord = correctWordClass.textContent.trim();
+        if (currentWord == correctWord) {
+            correctWordClass.classList.add('game__text_type_correct');
+        } else if (currentWord != correctWord) {
+            correctWordClass.classList.add('game__text_type_incorrect');
+        }
+        function getCurrentText() {
+            let currentText = '';
+            for (let i = counterOfWords + 1; i > 0; i--) {
+                currentText += placeHolder.querySelector(`${configForFindWord}${i - 1}`).textContent;
+            }
+            currentText = currentText.split(' ').reverse().join(' ').substring(1);
+            inputText.value = currentText;
+        }
+        getCurrentText();
+        /* console.log(correctWordClass.offsetLeft);
+        console.log(correctWordClass.offsetTop); */
+    } else if (event.keyCode === 8) {
+        function getCurrentTextLength(event) {
+            let currentText = '';
+            for (let i = counterOfWords + 1; i > 0; i--) {
+                currentText += placeHolder.querySelector(`${configForFindWord}${i - 1}`).textContent;
+            }
+            currentText = currentText.split(' ').reverse().join(' ').substring(1).length;
+            /* console.log(currentText);
+            console.log(gameText.value.length); */
+            if (currentText + 1 >= gameText.value.length) {
+                event.preventDefault();
+                return false;
+            }
+        }
+        getCurrentTextLength(event);
+    }
+});
+
 
 //start game functionality
 const startGameButton = document.querySelector('.start-game-button');
@@ -323,10 +358,7 @@ const buttonContainer = document.querySelector('.button-container');
 const content = document.querySelector('.content');
 const keyboardSuggestTemplate = document.querySelector('#keyboard-suggest').content;
 const keyboardSuggestContent = keyboardSuggestTemplate.querySelector('.keyboard__suggest');
-const gameText = gameTemplate.querySelector('.game__text');
 const timerTemplate = document.querySelector('#timer-template').content;
-
-
 
 
 startGameButton.addEventListener('click', () => {
@@ -349,7 +381,13 @@ function addGame() {
 }
 
 function gameStartSuggestionShow() {
-    document.addEventListener('keydown', gameStart);
+    document.addEventListener('keydown', function (e) {
+        gameStart();
+        if (e.keyCode === 9) {
+            event.preventDefault();
+            return false;
+        }
+    });
 }
 
 function gameStart() {
