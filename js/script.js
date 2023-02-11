@@ -342,8 +342,6 @@ gameText.addEventListener('keydown', function(event) {
                 currentText += placeHolder.querySelector(`${configForFindWord}${i - 1}`).textContent;
             }
             currentText = currentText.split(' ').reverse().join(' ').substring(1).length;
-            /* console.log(currentText);
-            console.log(gameText.value.length); */
             if (currentText + 1 >= gameText.value.length && gameText.value.length > 1) {
                 event.preventDefault();
                 return false;
@@ -386,7 +384,7 @@ function gameStartSuggestionShow() {
     document.addEventListener('keydown', function (e) {
         gameStart();
         if (e.keyCode === 9) {
-            event.preventDefault();
+            e.preventDefault();
             return false;
         }
     });
@@ -401,8 +399,12 @@ function gameStart() {
 }
 
 //countdown functionality
+const gameoverTemplate = document.querySelector('#gameover').content;
+const gameoverText = gameoverTemplate.querySelector('.gameover__result');
 let time = 58;
 const countDownText = timerTemplate.querySelector('.timer__time-counter');
+const timerContent = timerTemplate.querySelector('.timer');
+const game = gameTemplate.querySelector('.game');
 
 function addCountDown() {
     countDownText.textContent = `0:59`;
@@ -411,12 +413,21 @@ function addCountDown() {
 }
 
 function updateCountDown() {
-    const minutes = Math.floor(time / 60);
+    let minutes = Math.floor(time / 60);
     let seconds = time % 60;
     seconds = seconds < 10 ? "0" + seconds:seconds;
     countDownText.textContent = `${minutes}:${seconds}`;
     time--;
+    console.log(placeHolder.length);
+    console.log(gameText.value.length);
+    if (countDownText.textContent == '0:00' || placeHolderText.length <= gameText.value.length) {
+        timerContent.setAttribute('style', 'animation: scaling 0.4s ease');
+        game.setAttribute('style', 'animation: scaling 0.4s ease');
+        gameoverText.textContent = `Your result: ${counterOfCorrectWords} words / per min`;
+        setTimeout(() => {
+            timerContent.remove();
+            game.remove();
+            content.prepend(gameoverTemplate);
+        }, 400);
+    }
 }
-
-const gameoverTemplate = document.querySelector('#gameover').content;
-content.append(gameoverTemplate);
