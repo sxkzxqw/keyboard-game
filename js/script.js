@@ -163,28 +163,28 @@ function handleKeyDown(e) {
 const buttons = document.querySelectorAll('.button');
 const body = document.querySelector('.root');
 const offBackgroudGradient = document.querySelector('.offbackground');
+let theme = 'light';
 
-function handleOffBackground() {
-        body.setAttribute('style', 'background: #EFDECD;');
-        offBackgroudGradient.textContent = 'theme: light';
-        buttons.forEach((button) => {
-            button.setAttribute('style', 'background: white; color: black;');
-        });
-        offBackgroudGradient.removeEventListener('click', handleOffBackground);
-        offBackgroudGradient.addEventListener('click', handleOnBackground);
+function handleThemeChange() {
+  if (theme === 'light') {
+    body.setAttribute('style', 'background: #EFDECD;');
+    offBackgroudGradient.textContent = 'theme: light';
+    buttons.forEach((button) => {
+      button.setAttribute('style', 'background: white; color: black;');
+    });
+    theme = 'dark';
+  } else {
+    body.setAttribute('style', 'background: #1B1B1EFF');
+    offBackgroudGradient.textContent = 'theme: dark';
+    buttons.forEach((button) => {
+      button.setAttribute('style', 'background: #111012FF; color: white;');
+    });
+    theme = 'light';
+  }
 }
 
-function handleOnBackground() {
-        body.setAttribute('style', 'background: #1B1B1EFF');
-        offBackgroudGradient.textContent = 'theme: dark';
-        buttons.forEach((button) => {
-            button.setAttribute('style', 'background: #111012FF; color: white;');
-        });
-        offBackgroudGradient.removeEventListener('click', handleOnBackground);
-        offBackgroudGradient.addEventListener('click', handleOffBackground);
-}
-
-handleOffBackground();
+offBackgroudGradient.addEventListener('click', handleThemeChange);
+handleThemeChange();
 
 
 //off and on backlight
@@ -405,6 +405,7 @@ let time = 58;
 const countDownText = timerTemplate.querySelector('.timer__time-counter');
 const timerContent = timerTemplate.querySelector('.timer');
 const game = gameTemplate.querySelector('.game');
+const gameRestartButton = gameTemplate.querySelector('.gameover__button');
 
 function addCountDown() {
     countDownText.textContent = `0:59`;
