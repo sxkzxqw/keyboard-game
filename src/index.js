@@ -411,19 +411,26 @@ const timerContent = timerTemplate.querySelector('.timer');
 const game = gameTemplate.querySelector('.game');
 const gameRestartButton = gameTemplate.querySelector('.gameover__button');
 
-function addCountDown() {
+function addCountDown(e) {
     countDownText.textContent = `0:59`;
     setInterval(updateCountDown, 1000);
     document.removeEventListener('keydown', addCountDown);
 }
 
-function updateCountDown() {
+function updateCountDown(e) {
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
     seconds = seconds < 10 ? "0" + seconds:seconds;
     countDownText.textContent = `${minutes}:${seconds}`;
     time--;
-    if (countDownText.textContent == '0:00' || placeHolderText.length <= gameText.value.length) {
+}
+
+function checkGameOver() {
+    gameText.addEventListener('input', checkInputForGameOver);
+}
+
+function checkInputForGameOver() {
+    if (countDownText.textContent == '0:00' || placeHolderText.length <= gameText.value.length - 1) {
         timerContent.setAttribute('style', 'animation: scaling 0.4s ease');
         game.setAttribute('style', 'animation: scaling 0.4s ease');
         gameoverText.textContent = `Your result: ${counterOfCorrectWords} words / per min`;
@@ -434,3 +441,5 @@ function updateCountDown() {
         }, 400);
     }
 }
+
+checkGameOver();
