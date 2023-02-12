@@ -1,3 +1,7 @@
+import './pages/index.css';
+import { fishText } from './components/fish-text';
+console.log(fishText);
+let randomText = fishText.getWords({count: 180, dataType: 'string', lang: 'eng', repeat: true});
 //----------------------------------------------------------------------------
 
 //keyboard
@@ -270,7 +274,7 @@ handleSwitchThemeLight();
 
 //text validation
 const gameTemplate = document.querySelector('#game-template').content;
-const placeHolderText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam explicabo veritatis, sapiente doloribus placeat reprehenderit quasi voluptas ipsam quos perferendis laudantium expedita quidem minima cum temporibus consequuntur praesentium tenetur quas?Consequatur quae deleniti voluptate dolore consectetur! Voluptatum vel accusamus aut. Iure fugit nisi reiciendis quos repudiandae exercitationem adipisci sed, tenetur deserunt, rem voluptas odio, expedita laborum sint culpa ex cumque?At illo quibusdam ratione eos blanditiis quisquam eius doloribus molestiae ipsam, ea temporibus earum laudantium? Magnam similique reprehenderit placeat, provident quidem aperiam impedit illum deserunt enim voluptate laborum, id rem.Dolor perspiciatis itaque optio? Enim animi consequatur, totam repellendus recusandae, provident accusamus accusantium placeat, sequi modi optio voluptas repudiandae! Modi animi cum sint saepe ea, consequuntur repellat pariatur ducimus tempore.Nam, illo, eum accusamus inventore temporibus voluptate obcaecati, impedit doloremque ipsam et dolorum illum doloribus fuga. Ab autem at nostrum, repudiandae, aspernatur sed ullam, nulla optio facilis reiciendis obcaecati iusto.`;
+const placeHolderText = `${randomText}`;
 
 const text = placeHolderText.split(' ');
 const templateForEachWord = document.querySelector('#words').content;
@@ -419,8 +423,6 @@ function updateCountDown() {
     seconds = seconds < 10 ? "0" + seconds:seconds;
     countDownText.textContent = `${minutes}:${seconds}`;
     time--;
-    console.log(placeHolder.length);
-    console.log(gameText.value.length);
     if (countDownText.textContent == '0:00' || placeHolderText.length <= gameText.value.length) {
         timerContent.setAttribute('style', 'animation: scaling 0.4s ease');
         game.setAttribute('style', 'animation: scaling 0.4s ease');

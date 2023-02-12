@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
-    <link rel="shortcut icon" href="http://cdn.onlinewebfonts.com/svg/img_14765.png" type="image/x-icon">
+    <meta name="description" content="Webgame with 60% keyboard where you can test your print speed">
+    <meta name="keywords" content="print speed, keyboard, game, webgame">
+    <meta name="author" content="sxkzxqw">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<%=require('./images/img_14765.png')%>" type="image/x-icon">
     <title>keyboard game</title>
 </head>
 
@@ -111,7 +114,7 @@
         <div class="keyboard__suggest">
             <div class="keyboard__suggest">
                 <p class="keyboard__suggest-text">PRESS ANY KEY TO START</p>
-                <img class="keyboard__suggest-image" src="./images/arrow-down-svgrepo-com.svg">
+                <img class="keyboard__suggest-image" src="<%=require('./images/arrow-down-svgrepo-com.svg')%>">
                 <ul class="keyboard__suggest-list">
                     <div class="w-container">
                         <li class="wbtn-suggest suggest-key">w</li>
@@ -138,6 +141,5 @@
             </div>
         </div>
     </template>
-    <script src="./js/script.js"></script>
 </body>
 </html>
