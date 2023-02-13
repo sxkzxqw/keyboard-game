@@ -6,6 +6,10 @@ Type Fury is an adrenaline-fueled typing game that puts your speed and accuracy 
 Also this game gives you opportunity to see which key you are typing! You can change theme to dark mode, change your keyboard theme, and switch backlight mode!
 This game was created on vanilla JavaScript, HTML and CSS.
 
+**Link to play:**
+
+* [click](https://sxkzxqw.github.io/keyboard-game/)
+
 ### Plans for completion:
 
 * Fix bugs and make game more user-friendly
