@@ -12,10 +12,10 @@ This game was created on vanilla JavaScript, HTML and CSS.
 
 ### Plans for completion:
 
-* Fix bugs and make game more user-friendly
-* Add opportunity to switch languages
-* Add more functionality(As example: display how many letters did you type)
-* Rework design
+* Fix bugs and make game more user-friendly done - in progress 💼
+* Add opportunity to switch languages - done ✅
+* Add more functionality(As example: display how many letters did you type) - done ✅
+* Rework design - in progress 💼
 
 
 **Technologies**
