@@ -98,6 +98,19 @@
                 <button type="button" class="offbackground button">off background gradient</button>
                 <button type="button" class="offkeyboardbacklight button">off keyboard backlight</button>
                 <button type="button" class="theme-button button">switch keyboard theme to dark</button>
+                <div class="text-language">
+                    <p class="text__language">text language:</p>
+                    <fieldset class="text__radio">
+                        <label class="language__label">
+                            <p class="text__language-value">eng</p>
+                            <input type="radio" name="radio" value="eng" class="radio-input-eng" checked>
+                        </label>
+                        <label class="language__label">
+                            <p class="text__language-value">ru</p>
+                            <input type="radio" name="radio" value="ru" class="radio-input-ru">
+                        </label>
+                    </fieldset>
+                </div>
             </div>
         </div>
     </div>
@@ -136,7 +149,12 @@
         <div class="gameover__container">
             <div class="gameover__content-container">
                 <p class="gameover__text">Time's up!</p>
-                <p class="gameover__result">Your result: 100 words / per min</p>
+                <div class="gameover__result">
+                    <p class="gameover__text-result">Your result:</p>
+                    <p class="gameover__words"></p>
+                    <p class="gameover__or">or</p>
+                    <p class="gameover__letters"></p>
+                </div>
                 <button class="gameover__button" type="button">Try again?</button>
             </div>
         </div>

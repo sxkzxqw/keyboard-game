@@ -5,6 +5,24 @@ let randomText = fishText.getWords({count: 180, dataType: 'string', lang: 'eng',
 
 //keyboard
 
+const radioButtonEng = document.querySelector('.radio-input-eng');
+const radioButtonRu = document.querySelector('.radio-input-ru');
+const radioButtonParent = document.querySelectorAll('.language__label');
+
+radioButtonEng.addEventListener('click', () =>{
+    radioButtonEng.setAttribute('checked', 'checked');
+    radioButtonParent[0].classList.add('radio_type_active');
+    radioButtonParent[1].classList.remove('radio_type_active');
+    radioButtonRu.removeAttribute('checked');
+});
+
+radioButtonRu.addEventListener('click', () =>{
+    radioButtonRu.setAttribute('checked', 'checked');
+    radioButtonParent[1].classList.add('radio_type_active');
+    radioButtonParent[0].classList.remove('radio_type_active');
+    radioButtonEng.removeAttribute('checked');
+});
+
 //keys functionality
 const keys = {
     188: '.ldotbtn',
@@ -173,7 +191,8 @@ let placeHolderText = `${randomText}`;
 const gameoverTemplate = document.querySelector('#gameover').content;
 const gameoverContainer = gameoverTemplate.querySelector('.gameover__container');
 const gameoverContentConrainer = gameoverTemplate.querySelector('.gameover__content-container');
-const gameoverText = gameoverTemplate.querySelector('.gameover__result');
+const gameoverWords = gameoverTemplate.querySelector('.gameover__words');
+const gameoverLetters = gameoverTemplate.querySelector('.gameover__letters');
 const timerTemplate = document.querySelector('#timer-template').content;
 const countDownText = timerTemplate.querySelector('.timer__time-counter');
 const timerContent = timerTemplate.querySelector('.timer');
@@ -247,7 +266,6 @@ function gameValidation(gameTemplate, placeHolder) {
 }
 function checkTimer() {
     setInterval(function() {
-      console.log(countDownText.textContent);
       if (placeHolderText.length <= gameText.value.length || countDownText.textContent == '0:01') {
         gameText.removeEventListener('keydown', handleKeydownEvent);
     }
@@ -327,7 +345,14 @@ function updateCountDown() {
     if (countDownText.textContent == '0:00' || placeHolderText.length <= inputLength) {
         timerContent.setAttribute('style', 'animation: scaling 0.4s ease');
         game.setAttribute('style', 'animation: scaling 0.4s ease');
-        gameoverText.textContent = `Your result: ${counterOfCorrectWords} words / per min`;
+        const correctWordsLetters = placeHolder.querySelectorAll('.game__text_type_correct');
+        let counterOfLetters = 0;
+        for (let i = 0; i < correctWordsLetters.length; i++) {
+            counterOfLetters = counterOfLetters + correctWordsLetters[i].textContent.length;
+        }
+        gameoverWords.textContent = `${counterOfCorrectWords} words / per min`;
+        gameoverLetters.textContent = `${counterOfLetters} letters / per min`;
+        countDownText.textContent = '';
         countDownText.textContent = '';
         inputLength = 0;
         setTimeout(() => {
@@ -349,9 +374,14 @@ function checkInputForGameOver() {
     if (countDownText.textContent == '0:00' || placeHolderText.length <= gameText.value.length - 1) {
         timerContent.setAttribute('style', 'animation: scaling 0.4s ease');
         game.setAttribute('style', 'animation: scaling 0.4s ease');
-        gameoverText.textContent = `Your result: ${counterOfCorrectWords} words / per min`;
+        const correctWordsLetters = placeHolder.querySelectorAll('.game__text_type_correct');
+        let counterOfLetters = 0;
+        for (let i = 0; i < correctWordsLetters.length; i++) {
+            counterOfLetters = counterOfLetters + correctWordsLetters[i].textContent.length;
+        }
+        gameoverWords.textContent = `${counterOfCorrectWords} words / per min`;
+        gameoverLetters.textContent = `${counterOfLetters} letters / per min`;
         setTimeout(() => {
-            console.log('aa');
             gameoverContentConrainer.setAttribute('style', 'animation: scaling-reverse 0.4s ease;');
             timerContent.remove();
             game.remove();
