@@ -517,6 +517,7 @@
 }
 
 .gameover__text-result {
+    margin-bottom: 20px;
     text-align: center;
     font-size: 45px;
 }
@@ -586,7 +587,7 @@
 }
 
 .radio_type_active {
-    color: black;
+    color: orangered;
 }
 
 .radio_type_active::after {

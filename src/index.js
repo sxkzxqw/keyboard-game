@@ -1,13 +1,12 @@
 import './pages/index.css';
 import { fishText } from './components/fish-text';
-let randomText = fishText.getWords({count: 180, dataType: 'string', lang: 'eng', repeat: true});
+let randomText;
 //----------------------------------------------------------------------------
-
-//keyboard
 
 const radioButtonEng = document.querySelector('.radio-input-eng');
 const radioButtonRu = document.querySelector('.radio-input-ru');
 const radioButtonParent = document.querySelectorAll('.language__label');
+const textLanguageSection = document.querySelector('.text-language');
 
 radioButtonEng.addEventListener('click', () =>{
     radioButtonEng.setAttribute('checked', 'checked');
@@ -22,6 +21,20 @@ radioButtonRu.addEventListener('click', () =>{
     radioButtonParent[0].classList.remove('radio_type_active');
     radioButtonEng.removeAttribute('checked');
 });
+
+function getTextLanguage () {
+    if (radioButtonParent[0].classList.contains('radio_type_active')) {
+        randomText = fishText.getWords({count: 180, dataType: 'string', lang: 'eng', repeat: true});
+    } else {
+        randomText = fishText.getWords({count: 120, dataType: 'string', lang: 'rus', repeat: true});
+    }
+}
+
+getTextLanguage();
+
+
+//keyboard
+
 
 //keys functionality
 const keys = {
@@ -46,6 +59,33 @@ const keys = {
     221: '.backotherbtn',
     220: '.backanotherbtn',
     187: '.ravnobtn',
+    81: '.qbtn',
+    87: '.wbtn',
+    69: '.ebtn',
+    82: '.rbtn',
+    84: '.tbtn',
+    89: '.ybtn',
+    85: '.ubtn',
+    73: '.ibtn',
+    79: '.obtn',
+    80: '.pbtn',
+    189: '.-btn',
+    65: '.abtn',
+    83: '.sbtn',
+    68: '.dbtn',
+    70: '.fbtn',
+    71: '.gbtn',
+    72: '.hbtn',
+    74: '.jbtn',
+    75: '.kbtn',
+    76: '.lbtn',
+    90: '.zbtn',
+    88: '.xbtn',
+    67: '.cbtn',
+    86: '.vbtn',
+    66: '.bbtn',
+    78: '.nbtn',
+    77: '.mbtn'
   };
   
   document.addEventListener('keydown', handleKeyDown);
@@ -88,6 +128,7 @@ function handleThemeChange() {
     buttons.forEach((button) => {
       button.setAttribute('style', 'background: white; color: black;');
     });
+    textLanguageSection.setAttribute('style', 'background: white;');
     theme = 'dark';
   } else {
     body.setAttribute('style', 'background: #1B1B1EFF');
@@ -95,6 +136,7 @@ function handleThemeChange() {
     buttons.forEach((button) => {
       button.setAttribute('style', 'background: #111012FF; color: white;');
     });
+    textLanguageSection.setAttribute('style', 'background: #111012FF; color: white;');
     theme = 'light';
   }
 }
@@ -214,8 +256,6 @@ function textAppending (text) {
     }
 }
 
-textAppending(text);
-
 let counterOfCorrectWords = 0;
 let counterOfWords = -1;
 
@@ -276,8 +316,6 @@ function checkTimer() {
     gameText.addEventListener('keydown', handleKeydownEvent);
 }
 
-gameValidation(gameTemplate, placeHolder);
-
 //start game functionality
 const startGameButton = document.querySelector('.start-game-button');
 const buttonContainer = document.querySelector('.button-container');
@@ -287,6 +325,11 @@ const keyboardSuggestContent = keyboardSuggestTemplate.querySelector('.keyboard_
 
 
 startGameButton.addEventListener('click', () => {
+    getTextLanguage();
+    placeHolderText = randomText;
+    text = placeHolderText.split(' ');
+    textAppending(text);
+    gameValidation(gameTemplate, placeHolder);
     startGameButton.setAttribute('style', 'animation: scaling 0.4s ease; animation-delay: 0s;');
     addGame(startGameButton, gameTemplate, timerTemplate, buttonContainer);
     document.addEventListener('keydown', addCountDown);
@@ -415,7 +458,8 @@ restartGameButton.addEventListener('click', function () {
 
 function restartGame() {
     gameText.value = '';
-    placeHolderText = fishText.getWords({count: 180, dataType: 'string', lang: 'eng', repeat: true});
+    getTextLanguage();
+    placeHolderText = randomText;
     text = placeHolderText.split(' ');
     counterOfWords = -1;
     counterOfCorrectWords = 0;
